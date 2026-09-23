@@ -5,7 +5,7 @@ import vm from 'node:vm';
 
 const html = readFileSync('index.html', 'utf8');
 for (const [, path] of html.matchAll(/(?:href|src|data-src)="([^"]+)"/g)) {
-  if (!/^(https:|#)/.test(path)) assert.ok(existsSync(path), `Missing asset: ${path}`);
+  if (!/^(https:|#)/.test(path)) assert.ok(existsSync(path.split('?')[0]), `Missing asset: ${path}`);
   if (path.startsWith('#')) assert.ok(html.includes(`id="${path.slice(1)}"`), `Missing anchor: ${path}`);
 }
 for (const [, path] of readFileSync('styles.css', 'utf8').matchAll(/url\('([^']+)'\)/g)) assert.ok(existsSync(path));
