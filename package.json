@@ -1,0 +1,8 @@
+{
+  "name": "saki-site",
+  "private": true,
+  "scripts": {
+    "check": "node --check script.js && node scripts/check.mjs",
+    "dev": "python3 -m http.server 4174 --bind 127.0.0.1"
+  }
+}

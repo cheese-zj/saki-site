@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAKI — Skill Assembly and Kinematic Imitation</title>
+  <meta name="description" content="SAKI connects reusable interactions from human videos with scene-dependent robot motion for long-horizon mobile manipulation.">
+  <link rel="canonical" href="https://aus.bot/research/saki/">
+  <meta property="og:title" content="SAKI — Skill Assembly and Kinematic Imitation">
+  <meta property="og:description" content="Reusable human interactions. Connected mobile manipulation tasks.">
+  <meta property="og:url" content="https://aus.bot/research/saki/">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#f8fafc">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/Switzer-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header wrap">
+    <a class="wordmark" href="#main" aria-label="SAKI home">SAKI<span class="mark" aria-hidden="true">✳</span></a>
+    <nav aria-label="Main navigation"><a href="#method">Method</a><a href="#film">Watch</a><a href="https://aus.bot/">PAIR Lab <span aria-hidden="true">↗</span></a></nav>
+  </header>
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="title">
+      <div class="hero-heading">
+        <h1 id="title">SAKI<span class="full-stop">.</span></h1>
+        <div class="hero-description"><p class="formal-title">Skill Assembly and Kinematic Imitation</p><p>From human videos to<br>long-horizon mobile manipulation.</p></div>
+      </div>
+      <div class="hero-media">
+        <video id="intro" muted playsinline preload="none" poster="assets/intro.webp" aria-label="SAKI animated mosaic of human demonstrations, robot execution and object trajectories" data-src="assets/intro.mp4"></video>
+        <button class="replay" id="replay" type="button">Play introduction <span aria-hidden="true">▷</span></button>
+      </div>
+      <div class="hero-caption"><span>One demonstration per skill. Many ways to put it to work.</span><a href="#film">Watch the full film <span aria-hidden="true">↘</span></a></div>
+    </section>
+
+    <section class="premise wrap" aria-labelledby="premise-title">
+      <p class="section-label">The idea</p>
+      <div><h2 id="premise-title">Keep the interaction.<br>Adapt the motion.</h2><p>A human demonstrates an interaction in one scene. A mobile robot must realise it with a different body, new object locations and changing viewpoints. SAKI separates what the interaction requires from the motion needed to carry it out.</p><p>Reusable skills preserve contact, orientation and terminal relations. Scene estimates ground them in the current workspace; coordinated base, arm and gripper motion connects them into longer tasks.</p></div>
+    </section>
+
+    <section id="method" class="method wrap" aria-labelledby="method-title">
+      <div class="section-heading"><h2 id="method-title">From a video to a connected task.</h2><span>Inside SAKI</span></div>
+      <article class="method-row">
+        <div class="method-copy"><span class="step">01 / Prepare</span><h3>Learn the<br>interaction.</h3><p>Recover object motion from a human video and prepare a reusable skill. Retain how the object is held, where contact persists and how the action ends.</p><p class="detail">Interaction requirements stay with the skill; the transfer path can change.</p></div>
+        <figure><video controls muted playsinline loop preload="none" poster="assets/interaction.webp" src="assets/interaction.mp4" aria-label="Animation of human can disposal and reconstructed object motion"></video><figcaption>Human demonstration and object-centric reconstruction.</figcaption></figure>
+      </article>
+      <article class="method-row reverse">
+        <div class="method-copy"><span class="step">02 / Ground</span><h3>Reuse it in<br>a new scene.</h3><p>Bind object roles to current scene estimates. Whole-body kinematic imitation generates coordinated robot motion to realise the interaction.</p><p class="detail">Accepted visual updates revise remaining targets while preserving motion already committed to the robot.</p></div>
+        <figure><video controls muted playsinline loop preload="none" poster="assets/reuse.webp" src="assets/reuse.mp4" aria-label="Animation transferring a prepared object trajectory into a reconstructed scene"></video><figcaption>Prepared scene targets, shown as an explanatory animation.</figcaption></figure>
+      </article>
+      <article class="method-row">
+        <div class="method-copy"><span class="step">03 / Assemble</span><h3>Separate skills.<br>One longer task.</h3><p>Select, order and bind independently prepared skills to objects in a shared workspace. Dispose of a can, place tape and wipe a surface in a connected mobile sequence.</p><p class="detail">Retained scene estimates and the preceding robot configuration initialise the next skill.</p></div>
+        <figure><video controls muted playsinline loop preload="none" poster="assets/assembly.webp" src="assets/assembly.mp4" aria-label="Animation assembling disposal, placement and wiping skills"></video><figcaption>Illustrative skill assembly; source videos and scene reconstructions include separate recordings.</figcaption></figure>
+      </article>
+    </section>
+
+    <section id="film" class="film" aria-labelledby="film-title">
+      <div class="wrap">
+        <div class="film-heading"><div><p class="section-label">See it on the robot</p><h2 id="film-title">Interactions in motion.</h2></div><p>The complete project film.<br>2 min 59 sec · Narrated, with English captions.</p></div>
+        <video id="overview" controls playsinline preload="none" poster="assets/overview.webp" src="assets/overview.mp4" aria-label="SAKI complete project film">
+          <track kind="captions" src="assets/overview.vtt" srclang="en" label="English">
+          <p><a href="assets/overview.mp4">Download the SAKI film</a>.</p>
+        </video>
+        <div class="film-controls"><p id="chapter-status" aria-live="polite">Watch from the beginning, or choose a task below.</p><a href="assets/overview.mp4" download>Download film <span aria-hidden="true">↓</span></a></div>
+        <div class="chapters" role="group" aria-label="Jump to a task in the film">
+          <button type="button" data-time="65"><span class="chapter-time">01:05</span><strong>Tidying + wiping</strong><span>Dispose, place, then wipe.</span></button>
+          <button type="button" data-time="93.04"><span class="chapter-time">01:33</span><strong>Collection + pouring</strong><span>Connect interactions across locations.</span></button>
+          <button type="button" data-time="105.32"><span class="chapter-time">01:45</span><strong>Multi-location collection</strong><span>Carry a basket and collect at two tables.</span></button>
+          <button type="button" data-time="123"><span class="chapter-time">02:03</span><strong>Opening + placement</strong><span>Maintain support while manipulating.</span></button>
+          <button type="button" data-time="142"><span class="chapter-time">02:22</span><strong>Whiteboard wiping</strong><span>Preserve contact and tool alignment.</span></button>
+          <button type="button" data-time="163.08"><span class="chapter-time">02:43</span><strong>Door opening</strong><span>Couple handle engagement and door motion.</span></button>
+        </div>
+        <p class="footnote">Demonstrations are accelerated at the rates labelled in the film. First-person insets are approximately visually aligned. The collection sequence ends when the second can enters the basket.</p>
+      </div>
+    </section>
+
+    <section class="closing wrap"><p>Reusable interactions.<br>Connected tasks.</p><a href="https://aus.bot/research/">Explore research at PAIR Lab <span aria-hidden="true">↗</span></a></section>
+  </main>
+  <footer class="wrap"><span>SAKI · PAIR Lab, The University of Sydney</span><a href="https://github.com/cheese-zj/saki-site">Website source</a></footer>
+</body>
+</html>

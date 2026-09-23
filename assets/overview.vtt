@@ -1,0 +1,169 @@
+WEBVTT
+
+1
+00:00:05.200 --> 00:00:07.978
+Each skill uses just one demonstration video,
+
+2
+00:00:07.978 --> 00:00:10.360
+despite noise, viewpoint changes and occlusions.
+
+3
+00:00:10.700 --> 00:00:13.041
+The robot works in a different scene,
+
+4
+00:00:13.041 --> 00:00:15.716
+with its own body and new object locations.
+
+5
+00:00:16.000 --> 00:00:18.098
+How can it preserve the interaction
+
+6
+00:00:18.098 --> 00:00:20.896
+and connect these demonstrations into a complete task?
+
+7
+00:00:21.176 --> 00:00:25.424
+We recover object motion from human video and prepare reusable skills.
+
+8
+00:00:25.650 --> 00:00:27.946
+Each skill retains the interaction that matters:
+
+9
+00:00:27.946 --> 00:00:30.898
+how an object is held, where contact is maintained,
+
+10
+00:00:30.898 --> 00:00:32.538
+and how the action ends.
+
+11
+00:00:35.200 --> 00:00:39.088
+The interaction stays reusable while robot motion adapts to the current scene.
+
+12
+00:00:39.400 --> 00:00:41.114
+Object roles locate the targets,
+
+13
+00:00:41.114 --> 00:00:44.200
+and coordinated base and arm motion realises the task.
+
+14
+00:00:44.442 --> 00:00:47.010
+New observations can revise the remaining motion.
+
+15
+00:00:50.250 --> 00:00:52.431
+These skills can be selected, ordered,
+
+16
+00:00:52.431 --> 00:00:55.338
+and bound to objects in a shared workspace.
+
+17
+00:00:56.772 --> 00:00:59.251
+Can disposal, tape placement, and wiping
+
+18
+00:00:59.251 --> 00:01:02.556
+then become stages of one connected mobile task.
+
+19
+00:01:05.000 --> 00:01:08.672
+Separate demonstrations can form one continuous task.
+
+20
+00:01:13.568 --> 00:01:18.056
+Skill boundaries retain scene context as the robot moves between objects.
+
+21
+00:01:18.241 --> 00:01:22.105
+Each stage continues from the preceding robot configuration.
+
+22
+00:01:24.472 --> 00:01:28.312
+Different interaction requirements are handled within the same sequence.
+
+23
+00:01:29.145 --> 00:01:32.745
+Retained scene estimates provide the context for the next action.
+
+24
+00:01:33.240 --> 00:01:36.737
+Long-horizon tasks connect object interactions across locations.
+
+25
+00:01:36.737 --> 00:01:40.735
+Loading establishes the conditions for transport and pouring,
+
+26
+00:01:40.735 --> 00:01:44.232
+linking several skills into one continuous execution.
+
+27
+00:01:45.520 --> 00:01:48.140
+One arm keeps hold of the basket
+
+28
+00:01:48.140 --> 00:01:50.011
+while the other collects objects.
+
+29
+00:01:50.011 --> 00:01:53.004
+The robot carries the growing collection between tables,
+
+30
+00:01:53.004 --> 00:01:55.624
+reusing the same interaction at successive locations.
+
+31
+00:02:03.330 --> 00:02:06.162
+Some tasks require overlapping roles.
+
+32
+00:02:06.654 --> 00:02:09.536
+Bimanual coordination lets one arm maintain support
+
+33
+00:02:09.536 --> 00:02:12.006
+while the other manipulates an object.
+
+34
+00:02:14.082 --> 00:02:15.262
+Contact roles overlap,
+
+35
+00:02:15.262 --> 00:02:19.194
+and support persists until the other arm has safely withdrawn.
+
+36
+00:02:22.329 --> 00:02:26.577
+Wiping requires contact to persist as the tool moves across the surface.
+
+37
+00:02:29.751 --> 00:02:31.767
+The transferred skill preserves tool alignment
+
+38
+00:02:31.767 --> 00:02:34.791
+while the robot adapts its motion to the scene.
+
+39
+00:02:43.294 --> 00:02:47.787
+Door opening couples engagement with the handle to the motion of the door,
+
+40
+00:02:47.787 --> 00:02:50.206
+extending the interaction beyond the initial grasp.
+
+41
+00:02:52.730 --> 00:02:56.849
+SAKI connects reusable human interactions with scene-dependent robot motion,
+
+42
+00:02:56.849 --> 00:02:59.138
+enabling longer mobile manipulation tasks.
