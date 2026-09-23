@@ -60,3 +60,33 @@ for (const reduced of [true, false]) {
   assert.equal(film.paused, true);
 }
 console.log('Local assets, anchors, canonical, media sizes, chapter seeking, playback and reduced motion passed.');
+
+// Check the real scroll mapping and its reduced-motion/narrow-screen fallback.
+for (const enabled of [true, false]) {
+  let top = 0;
+  const properties = {};
+  const classes = new Map();
+  const query = { matches: enabled, addEventListener() {} };
+  const nodes = {
+    '.hero-scroll': { offsetHeight: 1224, getBoundingClientRect: () => ({ top }) },
+    '.hero-stage': { offsetHeight: 720, style: { setProperty: (key, value) => { properties[key] = value; } } },
+    '.hero-heading': { offsetTop: 0, offsetHeight: 342 },
+  };
+  const context = vm.createContext({
+    document: { querySelector: selector => nodes[selector], documentElement: { classList: { toggle: (key, value) => classes.set(key, value) } } },
+    matchMedia: () => query, addEventListener() {}, requestAnimationFrame() {},
+  });
+  vm.runInContext(readFileSync('motion.js', 'utf8'), context);
+  assert.equal(classes.get('hero-motion'), enabled);
+  if (!enabled) { assert.deepEqual(properties, {}); continue; }
+  for (const [position, expected] of [[100, 0], [-252, .5], [-504, 1], [-900, 1]]) {
+    top = position;
+    vm.runInContext('updateHero()', context);
+    assert.equal(properties['--hero-progress'], expected);
+    assert.equal(properties['--hero-top'], `${378 * (1 - expected)}px`);
+  }
+  query.matches = false;
+  vm.runInContext('updateHero()', context);
+  assert.equal(classes.get('hero-motion'), false);
+}
+console.log('Hero scroll bounds and motion fallback passed.');
