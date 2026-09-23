@@ -4,7 +4,7 @@ Buildless static site for **Skill Assembly and Kinematic Imitation from Human Vi
 
 - Canonical: https://aus.bot/research/saki/
 - GitHub Pages: https://cheese-zj.github.io/saki-site/
-- `npm run dev`: local preview on http://127.0.0.1:4174
+- `npm run dev`: basic layout preview on http://127.0.0.1:4174 (chapter seeking requires a byte-range-capable server such as Vite or GitHub Pages)
 - `npm run check`: asset, player and accessibility-behaviour checks; no dependencies required.
 
 GitHub Pages serves the repository root on `main`. Relative asset URLs support both Pages and the PAIR Lab Worker proxy. `.nojekyll` disables Jekyll processing.
