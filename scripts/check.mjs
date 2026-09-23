@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import vm from 'node:vm';
 
 const html = readFileSync('index.html', 'utf8');
-for (const [, path] of html.matchAll(/(?:href|src|data-src)="([^"]+)"/g)) {
+for (const [, path] of html.matchAll(/(?:href|src|data-src|poster)="([^"]+)"/g)) {
   if (!/^(https:|#)/.test(path)) assert.ok(existsSync(path.split('?')[0]), `Missing asset: ${path}`);
   if (path.startsWith('#')) assert.ok(html.includes(`id="${path.slice(1)}"`), `Missing anchor: ${path}`);
 }
@@ -30,7 +30,7 @@ function element(extra = {}) {
     scrollIntoView() {}, ...extra };
 }
 for (const reduced of [true, false]) {
-  const intro = element({ dataset: { src: 'assets/intro.mp4' } });
+  const intro = element({ dataset: { src: 'assets/mosaic.mp4' } });
   const replay = element();
   const film = element({ currentTime: 0, readyState: 0 });
   const label = element();

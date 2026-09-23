@@ -9,12 +9,12 @@ film.addEventListener('loadedmetadata', () => { film.currentTime = requestedTime
 function playIntro() {
   if (!intro.src) intro.src = intro.dataset.src;
   if (intro.ended) intro.currentTime = 0;
-  intro.play().catch(() => { replay.textContent = 'Play introduction ▷'; });
+  intro.play().catch(() => { replay.textContent = 'Play mosaic ▷'; });
 }
 replay.addEventListener('click', () => intro.paused ? playIntro() : intro.pause());
-intro.addEventListener('play', () => { replay.textContent = 'Pause introduction Ⅱ'; });
-intro.addEventListener('pause', () => { replay.textContent = 'Play introduction ▷'; });
-intro.addEventListener('ended', () => { replay.textContent = 'Replay introduction ↻'; });
+intro.addEventListener('play', () => { replay.textContent = 'Pause mosaic Ⅱ'; });
+intro.addEventListener('pause', () => { replay.textContent = 'Play mosaic ▷'; });
+intro.addEventListener('ended', () => { replay.textContent = 'Replay mosaic ↻'; });
 if (!motion.matches) playIntro();
 motion.addEventListener('change', () => { if (motion.matches) intro.pause(); });
 
