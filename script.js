@@ -1,22 +1,36 @@
 const intro = document.querySelector('#intro');
-const replay = document.querySelector('#replay');
+const mosaic = document.querySelector('.hero-media');
 const film = document.querySelector('#overview');
 const motion = matchMedia('(prefers-reduced-motion: reduce)');
 const chapters = [...document.querySelectorAll('[data-time]')];
 let requestedTime = 0;
 film.addEventListener('loadedmetadata', () => { film.currentTime = requestedTime; });
 
+let mosaicPausedByVisitor = false;
 function playIntro() {
   if (!intro.src) intro.src = intro.dataset.src;
-  if (intro.ended) intro.currentTime = 0;
-  intro.play().catch(() => { replay.textContent = 'Play mosaic ▷'; });
+  intro.play().catch(() => { mosaic.setAttribute('aria-label', 'Play mosaic animation'); });
 }
-replay.addEventListener('click', () => intro.paused ? playIntro() : intro.pause());
-intro.addEventListener('play', () => { replay.textContent = 'Pause mosaic Ⅱ'; });
-intro.addEventListener('pause', () => { replay.textContent = 'Play mosaic ▷'; });
-intro.addEventListener('ended', () => { replay.textContent = 'Replay mosaic ↻'; });
+function toggleMosaic() {
+  mosaicPausedByVisitor = !intro.paused;
+  if (intro.paused) playIntro(); else intro.pause();
+}
+mosaic.addEventListener('click', toggleMosaic);
+mosaic.addEventListener('keydown', event => {
+  if (event.key === ' ' || event.key === 'Enter') {
+    event.preventDefault();
+    toggleMosaic();
+  }
+});
+intro.addEventListener('play', () => mosaic.setAttribute('aria-label', 'Pause mosaic animation'));
+intro.addEventListener('pause', () => mosaic.setAttribute('aria-label', 'Play mosaic animation'));
+intro.autoplay = !motion.matches;
 if (!motion.matches) playIntro();
-motion.addEventListener('change', () => { if (motion.matches) intro.pause(); });
+motion.addEventListener('change', () => {
+  intro.autoplay = !motion.matches;
+  if (motion.matches) intro.pause();
+  else if (!document.hidden && !mosaicPausedByVisitor) playIntro();
+});
 
 for (const button of chapters) {
   button.setAttribute('aria-pressed', 'false');
@@ -35,12 +49,14 @@ film.addEventListener('timeupdate', () => {
   if (label.textContent !== status) label.textContent = status;
 });
 
-// Keep narration and demonstrations from playing over one another.
-for (const video of document.querySelectorAll('video')) {
+// The silent background mosaic is independent of the narrated demonstrations.
+const demonstrations = [...document.querySelectorAll('video')].filter(video => video !== intro);
+for (const video of demonstrations) {
   video.addEventListener('play', () => {
-    for (const other of document.querySelectorAll('video')) if (other !== video) other.pause();
+    for (const other of demonstrations) if (other !== video) other.pause();
   });
 }
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) for (const video of document.querySelectorAll('video')) video.pause();
+  else if (!motion.matches && !mosaicPausedByVisitor) playIntro();
 });

@@ -31,18 +31,21 @@ function element(extra = {}) {
 }
 for (const reduced of [true, false]) {
   const intro = element({ dataset: { src: 'assets/mosaic.mp4' } });
-  const replay = element();
+  const mosaic = element();
   const film = element({ currentTime: 0, readyState: 0 });
   const label = element();
   const chapters = [...html.matchAll(/data-time="([\d.]+)"><span[^>]+>[^<]+<\/span><strong>([^<]+)<\/strong>/g)].map(([, time, title]) => element({ dataset: { time }, querySelector: () => ({ textContent: title }) }));
   assert.equal(chapters.length, 6);
-  const map = { '#intro': intro, '#replay': replay, '#overview': film, '#chapter-status': label };
+  const map = { '#intro': intro, '.hero-media': mosaic, '#overview': film, '#chapter-status': label };
   const doc = element({ querySelector: selector => map[selector], querySelectorAll: selector => selector === 'video' ? [intro, film] : chapters });
   const motion = element({ matches: reduced });
   vm.runInNewContext(readFileSync('script.js', 'utf8'), { document: doc, matchMedia: () => motion });
   assert.equal(intro.paused, reduced, 'Reduced motion must prevent automatic playback');
-  replay.handlers.click();
+  assert.equal(intro.autoplay, !reduced);
+  mosaic.handlers.click();
   assert.equal(intro.paused, !reduced);
+  if (intro.paused) mosaic.handlers.keydown({ key: ' ', preventDefault() {} });
+  assert.equal(intro.paused, false);
   for (const chapter of chapters) {
     chapter.handlers.click();
     if (film.readyState === 0) {
@@ -53,11 +56,20 @@ for (const reduced of [true, false]) {
     film.handlers.timeupdate();
     assert.equal(film.currentTime, Number(chapter.dataset.time));
     assert.equal(chapter['aria-pressed'], 'true');
-    assert.equal(intro.paused, true);
+    assert.equal(intro.paused, false, 'Film playback must not stop the silent mosaic');
     assert.equal(chapters.filter(c => c['aria-pressed'] === 'true').length, 1);
   }
   doc.hidden = true; doc.handlers.visibilitychange();
   assert.equal(film.paused, true);
+  assert.equal(intro.paused, true);
+  doc.hidden = false; doc.handlers.visibilitychange();
+  assert.equal(intro.paused, reduced, 'Resume autoplay on returning to the tab');
+  if (intro.paused) mosaic.handlers.click();
+  mosaic.handlers.keydown({ key: 'Enter', preventDefault() {} });
+  assert.equal(intro.paused, true);
+  doc.hidden = true; doc.handlers.visibilitychange();
+  doc.hidden = false; doc.handlers.visibilitychange();
+  assert.equal(intro.paused, true, 'Keep a visitor-initiated pause');
 }
 console.log('Local assets, anchors, canonical, media sizes, chapter seeking, playback and reduced motion passed.');
 
