@@ -4,82 +4,149 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SAKI — Skill Assembly and Kinematic Imitation</title>
-  <meta name="description" content="SAKI connects reusable interactions from human videos with scene-dependent robot motion for long-horizon mobile manipulation.">
+  <meta name="description" content="SAKI: Skill Assembly and Kinematic Imitation from Human Videos for Long-Horizon Mobile Manipulation. Yijie Lu, James Zhao and Weiming Zhi, The University of Sydney.">
+  <meta name="author" content="Yijie Lu, James Zhao, Weiming Zhi">
   <link rel="canonical" href="https://aus.bot/research/saki/">
-  <meta property="og:title" content="SAKI — Skill Assembly and Kinematic Imitation">
+  <meta property="og:title" content="SAKI: Skill Assembly and Kinematic Imitation from Human Videos for Long-Horizon Mobile Manipulation">
   <meta property="og:description" content="Reusable human interactions. Connected mobile manipulation tasks.">
   <meta property="og:url" content="https://aus.bot/research/saki/">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#f8fafc">
+  <meta property="og:image" content="https://aus.bot/research/saki/assets/film-poster.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="citation_title" content="SAKI: Skill Assembly and Kinematic Imitation from Human Videos for Long-Horizon Mobile Manipulation">
+  <meta name="citation_author" content="Lu, Yijie">
+  <meta name="citation_author" content="Zhao, James">
+  <meta name="citation_author" content="Zhi, Weiming">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="theme-color" content="#f7f8f7">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=autoplay2">
-  <script src="script.js?v=autoplay2" defer></script>
-  <script src="motion.js?v=autoplay2" defer></script>
+  <link rel="stylesheet" href="styles.css?v=arxiv1">
+  <script src="script.js?v=arxiv1" defer></script>
+  <script src="motion.js?v=arxiv1" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="site-header">
     <a class="wordmark" href="#main" aria-label="SAKI home">SAKI</a>
-    <nav aria-label="Main navigation"><a href="#method">Method</a><a href="#film">Watch</a><a href="https://aus.bot/">PAIR Lab <span aria-hidden="true">↗</span></a></nav>
+    <nav aria-label="Main navigation"><a href="#film">Film</a><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#citation">Cite</a><a class="lab-link" href="https://aus.bot/">PAIR Lab <span aria-hidden="true">↗</span></a></nav>
   </header>
   <main id="main">
     <section class="hero" aria-labelledby="title">
       <div class="hero-scroll"><div class="hero-stage">
       <div class="hero-heading wrap">
-        <p class="formal-title">Skill Assembly and Kinematic Imitation</p>
-        <h1 id="title">From human videos<br> to connected robot skills.</h1>
-        <a class="film-link" href="#film">Watch the film <span aria-hidden="true">↘</span></a>
+        <h1 id="title"><span class="acronym">SAKI</span><span class="full-title">Skill Assembly and Kinematic Imitation from Human Videos for Long-Horizon Mobile Manipulation</span></h1>
+        <div class="author-block">
+          <p class="authors">
+            <a href="https://www.linkedin.com/in/yijie-lu-252318299/">Yijie Lu<sup>1,†</sup></a>
+            <a href="https://www.linkedin.com/in/james-zhao-4947a121a/">James Zhao<sup>1,†</sup></a>
+            <a href="https://www.weimingzhi.com/">Weiming Zhi<sup>1,2,*</sup></a>
+          </p>
+          <p class="affiliations"><sup>1</sup>School of Computer Science and <sup>2</sup>Australian Centre for Robotics, The University of Sydney, Australia</p>
+          <p class="author-notes"><sup>†</sup>Equal contribution. <sup>*</sup>Corresponding author: <a href="mailto:Weiming.Zhi@sydney.edu.au">Weiming.Zhi@sydney.edu.au</a></p>
+        </div>
+        <div class="actions" aria-label="Project links">
+          <a class="action primary" href="#film"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9.5-5.5z"/></svg>Watch the film</a>
+          <span class="action pending" aria-disabled="true" title="The arXiv link will be added when the paper is announced">Paper on arXiv <small>soon</small></span>
+          <a class="action" href="#citation">BibTeX</a>
+        </div>
       </div>
       <div class="hero-media" role="button" tabindex="0" aria-label="Play mosaic animation">
         <video id="intro" autoplay muted playsinline loop preload="none" poster="assets/mosaic.jpg" aria-hidden="true" data-src="assets/mosaic.mp4"></video>
       </div>
       </div></div>
-      <div class="hero-caption"><span>One demonstration per skill. Many ways to put it to work.</span><span>Long-horizon mobile manipulation.</span></div>
     </section>
 
-    <section class="premise wrap" aria-labelledby="premise-title">
-      <p class="section-label">The idea</p>
-      <div><h2 id="premise-title">Keep the interaction.<br> Adapt the motion.</h2><p>A human demonstrates an interaction in one scene. A mobile robot must realise it with a different body, new object locations and changing viewpoints. SAKI separates what the interaction requires from the motion needed to carry it out.</p><p>Reusable skills preserve contact, orientation and terminal relations. Scene estimates ground them in the current workspace; coordinated base, arm and gripper motion connects them into longer tasks.</p></div>
-    </section>
-
-    <section id="method" class="method wrap" aria-labelledby="method-title">
-      <div class="section-heading"><h2 id="method-title">From a video to a connected task.</h2><span>Inside SAKI</span></div>
-      <article class="method-row">
-        <div class="method-copy"><span class="step">01 / Prepare</span><h3>Learn the<br> interaction.</h3><p>Recover object motion from a human video and prepare a reusable skill. Retain how the object is held, where contact persists and how the action ends.</p><p class="detail">Interaction requirements stay with the skill; the transfer path can change.</p></div>
-        <figure><video controls muted playsinline loop preload="none" poster="assets/interaction.webp" src="assets/interaction.mp4" aria-label="Animation of human can disposal and reconstructed object motion"></video><figcaption>Human demonstration and object-centric reconstruction.</figcaption></figure>
-      </article>
-      <article class="method-row reverse">
-        <div class="method-copy"><span class="step">02 / Ground</span><h3>Reuse it in<br> a new scene.</h3><p>Bind object roles to current scene estimates. Whole-body kinematic imitation generates coordinated robot motion to realise the interaction.</p><p class="detail">Accepted visual updates revise remaining targets while preserving motion already committed to the robot.</p></div>
-        <figure><video controls muted playsinline loop preload="none" poster="assets/reuse.webp" src="assets/reuse.mp4" aria-label="Animation transferring a prepared object trajectory into a reconstructed scene"></video><figcaption>Prepared scene targets, shown as an explanatory animation.</figcaption></figure>
-      </article>
-      <article class="method-row">
-        <div class="method-copy"><span class="step">03 / Assemble</span><h3>Separate skills.<br> One longer task.</h3><p>Select, order and bind independently prepared skills to objects in a shared workspace. Dispose of a can, place tape and wipe a surface in a connected mobile sequence.</p><p class="detail">Retained scene estimates and the preceding robot configuration initialise the next skill.</p></div>
-        <figure><video controls muted playsinline loop preload="none" poster="assets/assembly.webp" src="assets/assembly.mp4" aria-label="Animation assembling disposal, placement and wiping skills"></video><figcaption>Illustrative skill assembly; source videos and scene reconstructions include separate recordings.</figcaption></figure>
-      </article>
-    </section>
-
-    <section id="film" class="film" aria-labelledby="film-title">
+    <section id="film" class="theatre" aria-labelledby="film-title">
       <div class="wrap">
-        <div class="film-heading"><div><p class="section-label">See it on the robot</p><h2 id="film-title">Interactions in motion.</h2></div><p>The complete project film.<br> 2 min 59 sec · Narrated, with English captions.</p></div>
-        <video id="overview" controls playsinline preload="none" poster="assets/overview.webp" src="assets/overview.mp4" aria-label="SAKI complete project film">
-          <track kind="captions" src="assets/overview.vtt" srclang="en" label="English">
-          <p><a href="assets/overview.mp4">Download the SAKI film</a>.</p>
-        </video>
-        <div class="film-controls"><p id="chapter-status" aria-live="polite">Watch from the beginning, or choose a task below.</p><a href="assets/overview.mp4" download>Download film <span aria-hidden="true">↓</span></a></div>
-        <div class="chapters" role="group" aria-label="Jump to a task in the film">
-          <button type="button" data-time="65"><span class="chapter-time">01:05</span><strong>Tidying + wiping</strong><span>Dispose, place, then wipe.</span></button>
-          <button type="button" data-time="93.04"><span class="chapter-time">01:33</span><strong>Collection + pouring</strong><span>Connect interactions across locations.</span></button>
-          <button type="button" data-time="105.32"><span class="chapter-time">01:45</span><strong>Multi-location collection</strong><span>Carry a basket and collect at two tables.</span></button>
-          <button type="button" data-time="123"><span class="chapter-time">02:03</span><strong>Opening + placement</strong><span>Maintain support while manipulating.</span></button>
-          <button type="button" data-time="142"><span class="chapter-time">02:22</span><strong>Whiteboard wiping</strong><span>Preserve contact and tool alignment.</span></button>
-          <button type="button" data-time="163.08"><span class="chapter-time">02:43</span><strong>Door opening</strong><span>Couple handle engagement and door motion.</span></button>
+        <div class="theatre-head">
+          <h2 id="film-title">SAKI on the robot</h2>
+          <p>Supplementary video, 2 min 59 s, narrated with English captions.</p>
         </div>
-        <p class="footnote">Demonstrations are accelerated at the rates labelled in the film. First-person insets are approximately visually aligned. The collection sequence ends when the second can enters the basket.</p>
+        <div class="player">
+          <video id="overview" controls playsinline preload="metadata" poster="assets/film-poster.webp" aria-label="SAKI supplementary video">
+            <source src="assets/film.mp4" type="video/mp4">
+            <track kind="captions" src="assets/overview.vtt" srclang="en" label="English">
+            <p><a href="assets/film.mp4">Download the SAKI film</a>.</p>
+          </video>
+          <button class="play-overlay" type="button" aria-label="Play the SAKI film"><span class="play-disc"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9.5-5.5z"/></svg></span><span class="play-text">Play film<small>2:59, 1080p, sound on</small></span></button>
+        </div>
+
+        <div class="timeline" aria-hidden="true">
+          <div class="timeline-groups"><span style="flex-grow:65">Method</span><span style="flex-grow:107.48">Autonomous tasks</span><span style="flex-grow:7"></span></div>
+          <div class="timeline-track"></div>
+        </div>
+        <div class="now-playing"><p id="chapter-status" aria-live="polite">Choose a chapter, or play from the beginning.</p><a href="assets/film.mp4" download="SAKI-film-1080p.mp4">Download 1080p <span aria-hidden="true">↓</span></a></div>
+
+        <div class="chapter-groups">
+          <div class="chapter-group">
+            <h3>Method</h3>
+            <ol class="chapters">
+              <li><button type="button" data-time="0" data-end="5"><img src="assets/chapters/01.webp" alt="" loading="lazy" width="480" height="270"><span class="chapter-time">0:00</span><strong>Opening</strong></button></li>
+              <li><button type="button" data-time="5" data-end="21"><img src="assets/chapters/02.webp" alt="" loading="lazy" width="480" height="270"><span class="chapter-time">0:05</span><strong>The problem</strong></button></li>
+              <li><button type="button" data-time="21" data-end="33"><img src="assets/chapters/03.webp" alt="" loading="lazy" width="480" height="270"><span class="chapter-time">0:21</span><strong>Learn the interaction</strong></button></li>
+              <li><button type="button" data-time="33" data-end="50"><img src="assets/chapters/04.webp" alt="" loading="lazy" width="480" height="270"><span class="chapter-time">0:33</span><strong>Reuse across scenes</strong></button></li>
+              <li><button type="button" data-time="50" data-end="65"><img src="assets/chapters/05.webp" alt="" loading="lazy" width="480" height="270"><span class="chapter-time">0:50</span><strong>Assemble a task</strong></button></li>
+            </ol>
+          </div>
+          <div class="chapter-group">
+            <h3>Autonomous tasks</h3>
+            <ol class="chapters">
+              <li><button type="button" data-time="65" data-end="93.04"><img src="assets/chapters/06.webp" alt="" loading="lazy" width="480" height="270"><span class="chapter-time">1:05</span><strong>Tidying and wiping</strong></button></li>
+              <li><button type="button" data-time="93.04" data-end="105.32"><img src="assets/chapters/07.webp" alt="" loading="lazy" width="480" height="270"><span class="chapter-time">1:33</span><strong>Collection and pouring</strong></button></li>
+              <li><button type="button" data-time="105.32" data-end="123"><img src="assets/chapters/08.webp" alt="" loading="lazy" width="480" height="270"><span class="chapter-time">1:45</span><strong>Multi-location collection</strong></button></li>
+              <li><button type="button" data-time="123" data-end="142"><img src="assets/chapters/09.webp" alt="" loading="lazy" width="480" height="270"><span class="chapter-time">2:03</span><strong>Box opening and placement</strong></button></li>
+              <li><button type="button" data-time="142" data-end="163.08"><img src="assets/chapters/10.webp" alt="" loading="lazy" width="480" height="270"><span class="chapter-time">2:22</span><strong>Whiteboard wiping</strong></button></li>
+              <li><button type="button" data-time="163.08" data-end="172.48"><img src="assets/chapters/11.webp" alt="" loading="lazy" width="480" height="270"><span class="chapter-time">2:43</span><strong>Door opening</strong></button></li>
+            </ol>
+          </div>
+        </div>
+        <p class="footnote">Robot footage is accelerated at the rate shown in each clip. First-person insets are approximately visually aligned. The collection sequence ends when the second can enters the basket.</p>
       </div>
     </section>
 
-    <section class="closing wrap"><p>Reusable interactions.<br> Connected tasks.</p><a href="https://aus.bot/research/">Explore research at PAIR Lab <span aria-hidden="true">↗</span></a></section>
+    <section id="abstract" class="abstract wrap" aria-labelledby="abstract-title">
+      <h2 id="abstract-title">Abstract</h2>
+      <div class="abstract-body">
+        <p>Learning from human videos offers a promising route to acquiring diverse manipulation skills. Extending this capability beyond tabletop settings to long-horizon mobile manipulation requires adapting and composing demonstrated interactions across changing scenes and robot configurations. We present Skill Assembly and Kinematic Imitation (SAKI), a framework connecting human-video skill acquisition, cross-demonstration assembly and closed-loop whole-body execution.</p>
+        <p>SAKI prepares reusable object-centric skills that preserve task-critical interactions while allowing transfer paths to adapt. Given a goal and supplied task dependencies, it selects and orders skills, binds their object roles to the current scene, and carries scene estimates and robot configuration between successive skills. Whole-body kinematic imitation generates coordinated base, arm and gripper motion. During execution, persistent object estimates maintain task references across viewpoint changes, while visual feedback updates remaining trajectories.</p>
+        <p>Real-robot experiments demonstrate skill reuse across layouts and the composition of independently demonstrated interactions into continuous mobile tasks, including tidying and wiping. Ablation results show that task-conditioned reference preparation substantially improves long-horizon task completion with whole-body optimisation and visual feedback held fixed.</p>
+      </div>
+    </section>
+
+    <section id="method" class="method wrap" aria-labelledby="method-title">
+      <div class="section-heading"><h2 id="method-title">Keep the interaction. Adapt the motion.</h2><p>A human demonstrates an interaction once, in one scene. The robot must realise it with a different body, new object locations and changing viewpoints. SAKI separates what the interaction requires from the motion that carries it out.</p></div>
+      <figure class="overview-figure">
+        <a href="assets/overview-figure.webp"><img src="assets/overview-figure.webp" alt="SAKI overview. Left: object-task assets are selected, ordered and bound to the current scene, giving scene-grounded object motion for three numbered stages. Right: whole-body optimisation turns planning inputs and scene-grounded targets into coordinated execution, with a closed loop through updated observations, persistent object state and updated remaining targets." width="2305" height="963" loading="lazy"></a>
+        <figcaption>Skill assembly binds prepared object-task assets to the current scene. Whole-body kinematic imitation executes them, and visual feedback revises the remaining targets.</figcaption>
+      </figure>
+      <ol class="steps">
+        <li class="step" style="--step:var(--t1)">
+          <figure><video class="ambient" muted playsinline loop preload="none" poster="assets/interaction.webp" src="assets/interaction.mp4" aria-label="Human can disposal and reconstructed object motion"></video></figure>
+          <div class="step-copy"><span class="marker" aria-hidden="true">1</span><h3>Learn the interaction</h3><p>Recover object motion from a single human video and prepare a reusable skill that keeps how the object is held, where contact persists and how the action ends.</p></div>
+        </li>
+        <li class="step" style="--step:var(--t2)">
+          <figure><video class="ambient" muted playsinline loop preload="none" poster="assets/reuse.webp" src="assets/reuse.mp4" aria-label="A prepared object trajectory transferred into reconstructed scenes"></video></figure>
+          <div class="step-copy"><span class="marker" aria-hidden="true">2</span><h3>Reuse it in a new scene</h3><p>Bind object roles to current scene estimates. Whole-body kinematic imitation generates base, arm and gripper motion, and accepted visual updates revise the remaining targets.</p></div>
+        </li>
+        <li class="step" style="--step:var(--t3)">
+          <figure><video class="ambient" muted playsinline loop preload="none" poster="assets/assembly.webp" src="assets/assembly.mp4" aria-label="Disposal, placement and wiping skills assembled into one task"></video></figure>
+          <div class="step-copy"><span class="marker" aria-hidden="true">3</span><h3>Assemble a longer task</h3><p>Select, order and bind independently prepared skills. Retained scene estimates and the preceding robot configuration initialise each next skill.</p></div>
+        </li>
+      </ol>
+      <p class="footnote">Prepared target paths are explanatory visualisations. Assembly footage and point clouds include separate recordings.</p>
+    </section>
+
+    <section id="citation" class="citation wrap" aria-labelledby="citation-title">
+      <div class="citation-head"><h2 id="citation-title">Cite SAKI</h2><button type="button" class="copy" data-copy="bibtex">Copy BibTeX</button></div>
+<pre id="bibtex"><code>@misc{lu2026saki,
+  title        = {{SAKI}: Skill Assembly and Kinematic Imitation from Human Videos
+                  for Long-Horizon Mobile Manipulation},
+  author       = {Lu, Yijie and Zhao, James and Zhi, Weiming},
+  year         = {2026},
+  howpublished = {\url{https://aus.bot/research/saki/}}
+}</code></pre>
+    </section>
   </main>
-  <footer class="wrap"><span>SAKI · PAIR Lab, The University of Sydney</span><a href="https://github.com/cheese-zj/saki-site">Website source</a></footer>
+  <footer class="wrap"><span>SAKI, PAIR Lab, The University of Sydney</span><span class="footer-links"><a href="https://aus.bot/research/">More PAIR Lab research</a><a href="https://github.com/cheese-zj/saki-site">Website source</a></span></footer>
 </body>
 </html>
