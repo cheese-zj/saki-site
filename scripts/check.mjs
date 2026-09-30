@@ -23,6 +23,8 @@ checkAssets('assets');
 // Chapters must tile the film timeline without gaps, in order.
 const chapters = [...html.matchAll(/data-time="([\d.]+)" data-end="([\d.]+)">[\s\S]*?<strong>([^<]+)<\/strong>/g)].map(([, start, end, title]) => ({ start: Number(start), end: Number(end), title }));
 assert.equal(chapters.length, 11);
+for (const clip of ["tidy","pour","collect","box","wipe","door","grid"]) assert.ok(html.includes(`assets/clips/${clip}.mp4`), `Missing clip ${clip}`);
+assert.equal((html.match(/assets\/clips\/[a-z-]+\.mp4/g) || []).length, new Set(html.match(/assets\/clips\/[a-z-]+\.mp4/g)).size, "Each clip appears once");
 assert.equal(chapters[0].start, 0);
 for (let i = 1; i < chapters.length; i++) assert.equal(chapters[i].start, chapters[i - 1].end, `Gap before ${chapters[i].title}`);
 assert.ok(chapters.at(-1).end < 179.54);
