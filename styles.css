@@ -51,7 +51,7 @@ a.action:hover{text-decoration:none;border-color:#b9c2ca}
 .action svg{width:13px;height:13px;fill:currentColor}
 .action.primary{background:var(--ink);border-color:var(--ink);color:#fff}
 a.action.primary:hover{background:#26323e}
-.action.pending{color:var(--muted);cursor:default;border-style:dashed}
+
 .action small{font-size:.8125rem;padding:2px 8px;border-radius:999px;background:#eef1f3}
 .hero-media{margin-inline:24px;overflow:hidden;border-radius:18px;background:#152028;cursor:pointer}
 .hero-media video{aspect-ratio:16/9;object-fit:cover;background:#152028}
@@ -170,3 +170,6 @@ footer{display:flex;justify-content:space-between;gap:20px;padding:26px 0 36px;b
   pre{padding:18px;font-size:.8125rem}
   footer,.footer-links{display:block}.footer-links a{display:block;margin-top:10px}
 }
+@media(max-width:760px){.nav-arxiv{display:none}}
+.chapter-group{min-width:0}.timeline{overflow-x:clip}
+@media(max-width:960px){.chapter-groups{grid-template-columns:minmax(0,1fr)}}
