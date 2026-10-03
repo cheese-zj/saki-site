@@ -1,0 +1,17 @@
+# SAKI
+
+> SAKI (Skill Assembly and Kinematic Imitation) learns object-centric manipulation skills from one human video per skill, binds them to new scenes, and assembles them into long-horizon mobile manipulation tasks executed with whole-body kinematic imitation and visual feedback. Paper: arXiv:2609.36031 (cs.RO, 28 September 2026). Authors: Yijie Lu and James Zhao (equal contribution), Weiming Zhi (corresponding), The University of Sydney.
+
+The project page is a single HTML page with video. The Markdown version below has every claim, video description, figure caption, film chapter and the full film transcript in plain text.
+
+## Docs
+
+- [Project page as Markdown](https://aus.bot/research/saki/index.md): full text of the page, including descriptions of every video
+- [Paper (PDF)](https://arxiv.org/pdf/2609.36031): the authoritative source for method details and results
+- [arXiv abstract page](https://arxiv.org/abs/2609.36031)
+- [BibTeX](https://aus.bot/research/saki/saki.bib)
+
+## Optional
+
+- [Film captions (WebVTT)](https://aus.bot/research/saki/assets/overview.vtt): narration of the 2 min 59 s film
+- [Website source](https://github.com/cheese-zj/saki-site)

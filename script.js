@@ -140,3 +140,120 @@ for (const button of document.querySelectorAll('[data-copy]')) {
     setTimeout(() => { button.textContent = 'Copy BibTeX'; }, 2000);
   });
 }
+
+// Recovered object paths: a faint full path, overdrawn as the demonstration reaches each observation.
+const SVG = 'http://www.w3.org/2000/svg';
+const GAP = .5; // seconds without observations, bridged by a dashed segment
+for (const card of document.querySelectorAll('.trace')) {
+  const video = card.querySelector('video');
+  const svg = card.querySelector('svg[data-path]');
+  const offset = Number(card.dataset.offset) || 0;
+  const points = svg.dataset.path.trim().split(/\s+/).map(p => p.split(',').map(Number));
+  const width = svg.viewBox.baseVal.width;
+  const make = (name, attrs) => {
+    const node = document.createElementNS(SVG, name);
+    for (const [key, value] of Object.entries(attrs)) node.setAttribute(key, value);
+    return svg.appendChild(node);
+  };
+  const segments = points.slice(1).map(([x, y, t], i) => {
+    const [x0, y0, t0] = points[i];
+    const gap = t - t0 > GAP;
+    make('line', { x1: x0, y1: y0, x2: x, y2: y, class: gap ? 'trace-under gap' : 'trace-under', 'stroke-width': width / 260 });
+    const hue = 205 + 105 * i / points.length;
+    return { x0, y0, t0, x, y, t, line: make('line', { x1: x0, y1: y0, x2: x0, y2: y0, class: gap ? 'trace-live gap' : 'trace-live', stroke: `hsl(${hue} 90% 50%)`, 'stroke-width': width / 150 }) };
+  });
+  const head = make('circle', { r: width / 95, class: 'trace-head', 'stroke-width': width / 500 });
+  let frame = 0;
+  function draw() {
+    const t = video.currentTime + offset;
+    let hx = points[0][0], hy = points[0][1];
+    for (const s of segments) {
+      const k = Math.max(0, Math.min(1, (t - s.t0) / (s.t - s.t0)));
+      const x = s.x0 + (s.x - s.x0) * k, y = s.y0 + (s.y - s.y0) * k;
+      s.line.setAttribute('x2', x);
+      s.line.setAttribute('y2', y);
+      s.line.style.opacity = k > 0 ? 1 : 0;
+      if (k > 0) { hx = x; hy = y; }
+    }
+    head.setAttribute('cx', hx);
+    head.setAttribute('cy', hy);
+    card.classList.toggle('tracking', t >= points[0][2]);
+    frame = video.paused ? 0 : requestAnimationFrame(draw);
+  }
+  video.addEventListener('play', () => { if (!frame) frame = requestAnimationFrame(draw); });
+  video.addEventListener('seeked', draw);
+  video.addEventListener('loadeddata', draw);
+  draw();
+}
+
+// Skill-chain strip on the tidying run: progress per stage, and each stage seeks the run.
+for (const chain of document.querySelectorAll('.chain')) {
+  const video = chain.querySelector('video');
+  const stages = [...chain.querySelectorAll('[data-from]')].map(button => ({ button, from: Number(button.dataset.from), to: Number(button.dataset.to) }));
+  let frame = 0;
+  function update() {
+    const t = video.currentTime;
+    for (const s of stages) {
+      s.button.style.setProperty('--p', Math.max(0, Math.min(1, (t - s.from) / (s.to - s.from))));
+      const current = t >= s.from && t < s.to;
+      s.button.classList.toggle('active', current);
+      if (current) s.button.setAttribute('aria-current', 'step'); else s.button.removeAttribute('aria-current');
+    }
+    frame = video.paused ? 0 : requestAnimationFrame(update);
+  }
+  for (const s of stages) s.button.addEventListener('click', () => {
+    video.currentTime = s.from + .01;
+    pausedByVisitor.delete(video);
+    if (!dialog.open) video.play().catch(() => {});
+    update();
+  });
+  video.addEventListener('play', () => { if (!frame) frame = requestAnimationFrame(update); });
+  video.addEventListener('seeked', update);
+  update();
+}
+
+// Demonstration/robot pairs: an ARIA tab set. The panel's clips restart together when shown.
+for (const tablist of document.querySelectorAll('.pair-tabs')) {
+  const tabs = [...tablist.querySelectorAll('[role="tab"]')];
+  function select(tab, focus) {
+    for (const other of tabs) {
+      const chosen = other === tab;
+      other.setAttribute('aria-selected', String(chosen));
+      other.tabIndex = chosen ? 0 : -1;
+      const panel = document.getElementById(other.getAttribute('aria-controls'));
+      panel.hidden = !chosen;
+      for (const video of panel.querySelectorAll('video')) {
+        if (!chosen) video.pause();
+        else { video.currentTime = 0; if (mayPlay(video)) video.play().catch(() => {}); }
+      }
+    }
+    if (focus) tab.focus();
+  }
+  tablist.addEventListener('click', event => {
+    const tab = event.target.closest('[role="tab"]');
+    if (tab) select(tab);
+  });
+  tablist.addEventListener('keydown', event => {
+    const i = tabs.indexOf(document.activeElement);
+    const next = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[event.key];
+    if (i < 0 || next === undefined) return;
+    event.preventDefault();
+    select(tabs[(next + tabs.length) % tabs.length], true);
+  });
+}
+
+// Contents: mark the section being read, and keep its link in view on narrow screens.
+const nav = document.querySelector('.site-header nav');
+const navLinks = new Map([...nav.querySelectorAll('a')].map(link => [link.hash.slice(1), link]));
+if ('IntersectionObserver' in window) {
+  const sectionObserver = new IntersectionObserver(entries => {
+    for (const { target, isIntersecting } of entries) {
+      const link = navLinks.get(target.id);
+      if (!isIntersecting) { link.removeAttribute('aria-current'); continue; }
+      for (const other of navLinks.values()) other.toggleAttribute('aria-current', other === link);
+      link.setAttribute('aria-current', 'location');
+      if (nav.scrollWidth > nav.clientWidth) nav.scrollTo({ left: link.offsetLeft - (nav.clientWidth - link.offsetWidth) / 2, behavior: motion.matches ? 'auto' : 'smooth' });
+    }
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  for (const id of navLinks.keys()) sectionObserver.observe(document.getElementById(id));
+}
